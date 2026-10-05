@@ -10,3 +10,4 @@ const probarApi=async()=>{
     console.log('Total de resultados',datos.total_results);
 }
 probarApi();
+/* conexion basica */
