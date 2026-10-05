@@ -19,6 +19,7 @@ const crearTarjeta=(pelicula)=>{
             <article class="movie__card">
                 <div class="movie-card__poster">
                     <img class="movie-card__image" src="${imagen}" alt="${title}">
+                    <span class="movie-card__rating">${rating}</span>
                 </div>
                 <div class="movie-card__content">
                     <h3 class="movie-card__title">${title}</h3>
@@ -31,13 +32,58 @@ const crearTarjeta=(pelicula)=>{
 
 const iniciar = async () => {
     console.log('Mostrar pelicula');
-    const peliculas = await obtenerPeliculas();
-    const primera = peliculas[0];
-    console.log('Primera pelicula', primera);
-    moviesgrid.innerHTML = crearTarjeta(primera);
+    mostrarLoading();
+    try{
+        const peliculas = await obtenerPeliculas();
+        console.log(`${peliculas.lenght} peliculas obtenidas`);
+        ocultarLoading();
+        moviesgrid.innerHTML = peliculas.map(crearTarjeta).join('');  //aca para ver varias peliculas
+    console.log('Primera pelicula renderizada');
+        
+    }catch(error){
+        console.log('Error',error);
+        let message='no se pudo cargar peliculas';
+        if(error.message.includes('401')){
+            mensaje='API KEY INVALIDA VERIFICA TU CLAVE';
+        }else if (error.message.includes('fetch')){
+            mensaje='error de red';
+        } else if (error.message.includes('429')){
+            mensaje='existen demasiadas peticiones';
+        }
+        mostrarError();
+    }
+
+
+
+    
+    console.log(`${peliculas.lenght} peliculas obtenidas`);
+    //const primera = peliculas[0];
+    //console.log('Primera pelicula', primera);   //aca es para ver una peliculas
+    moviesgrid.innerHTML = peliculas.map(crearTarjeta).join('');  //aca para ver varias peliculas
     console.log('Primera pelicula renderizada');
 }
+
+
 iniciar();
+
+const loadingDiv=document.getElementById('loading');
+const erroDiv=document.getElementById('error');
+const errorMessage= document.getElementById('error-message');
+const mostrarLoading=()=>{
+    loadingDiv.style.display='flex';
+    erroDiv.style.display='none';
+    moviesgrid.innerHTML='';
+}
+const ocultarLoading=()=>{
+    loadingDiv.style.display='flex';
+}
+const mostrarError=(mensaje)=>{
+    ocultarLoading();
+    errorMessage=mensaje;
+    erroDiv.style.display='flex';
+    moviesgrid.innerHTML='';
+}
+
 
 
 
