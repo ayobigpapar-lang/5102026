@@ -1,4 +1,4 @@
-let nextId=4;
+/* let nextId=4;
 let filtroGenero='';
 let filtroEstado='';
 let busqueda='';
@@ -72,4 +72,4 @@ const crearTarjetaPelicula = (pelicula) => {
 
     // 5. Retornar el elemento creado
     return article;
-};
+}; */

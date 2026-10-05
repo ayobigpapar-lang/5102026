@@ -1,4 +1,4 @@
-:root {
+/* :root {
     --color-background: #f4f4f4;
     --color-background-card: #ffffff;
     --color-text: #333333;
@@ -320,7 +320,7 @@ body {
     box-shadow: var(--shadow-large);
 }
 
-/* Modificador: película vista */
+
 .movie-card--viewed {
     border-left-color: var(--color-success);
     opacity: 0.75;
@@ -450,4 +450,5 @@ body {
     .movie-form {
         grid-template-columns: 1fr;
     }
-}
+} 
+*/
